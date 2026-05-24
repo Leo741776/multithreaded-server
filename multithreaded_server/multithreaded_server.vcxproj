@@ -39,7 +39,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="public\index.html" />
-    <None Include="README.md" />
     <None Include="test\stress-test.ps1" />
   </ItemGroup>
   <ItemGroup>

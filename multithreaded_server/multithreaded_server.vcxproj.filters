@@ -66,7 +66,6 @@
   <ItemGroup>
     <None Include="public\index.html" />
     <None Include="test\stress-test.ps1" />
-    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
