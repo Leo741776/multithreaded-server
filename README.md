@@ -7,11 +7,11 @@ This is an HTTP server written in C++ using Winsock and a custom thread pool.
 ### Option 1 - Visual Studio
 
 Open the project solution in Visual Studio and run it.
-You can test it in a browser by visiting: `http://localhost:8080/`
+You can test it in a browser by visiting `http://localhost:8080/`
 
 ### Option 2 - CMake
 
-From the project root, open Developer PowerShell and run:
+From the project root, open Developer PowerShell and run:  
 `cmake -S . -B build`  
 `cmake --build build`  
 Then start the server:  
