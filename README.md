@@ -2,6 +2,11 @@
 
 This is an HTTP server written in C++ using Winsock and a custom thread pool.
 
+## Program Flow
+<p align="center">
+  <img src="media/1.png"/>
+</p>
+
 ## How to Run
 
 ### Option 1 - Visual Studio
@@ -70,9 +75,3 @@ The server uses a fixed-size thread pool instead of creating a new thread for ev
 When a client connects, the main server thread accepts the connection and adds a task to the thread pool. One of the available worker threads then handles that client connection.
 
 This allows multiple clients to be handled concurrently while avoiding the overhead of creating and destroying a thread for every request.
-
-## Program Flow
-
-<p align="center">
-  <img src="media/1.png"/>
-</p>
