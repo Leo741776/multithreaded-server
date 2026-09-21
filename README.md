@@ -24,10 +24,27 @@ Then start the server:
 
 ### Stress Test
 
-In a second Developer PowerShell window, from the project root, run:  
-`powershell -ExecutionPolicy Bypass -File .\test\stress-test.ps1`
+Start the server first. Then, in a second terminal from the project root, run:  
+`python test/stress_test.py`
 
-A successful stress test should show each wave returning SUCCESS responses.
+Requires Python 3.9+ and no extra packages.
+
+Options:
+
+- `--waves` - number of request waves (default: 10)
+- `--requests` - concurrent requests per wave (default: 50)
+- `--url` - target URL (default: `http://127.0.0.1:8080/`)
+- `--timeout` - per-request timeout in seconds (default: 10)
+
+Example with heavier load:  
+`python test/stress_test.py --waves 20 --requests 200`
+
+The script reports each wave's result counts, average / p95 / max latency, and throughput, followed by an overall success rate. A successful stress test should show every request returning SUCCESS.
+
+> **Note:** On Windows, `localhost` can resolve to IPv6 (`::1`) first. If the server only listens on IPv4, each request waits ~2 seconds before falling back. The test defaults to `127.0.0.1` to avoid this.
+
+To save the results to a file:  
+`python test/stress_test.py > test/stress-test-output.txt`
 
 ## Overview
 
@@ -37,7 +54,7 @@ A successful stress test should show each wave returning SUCCESS responses.
 - Parses basic HTTP GET requests
 - Serves a static `index.html` file from `public/`
 - Returns simple `404 Not Found` and `405 Method Not Allowed` responses
-- Includes a PowerShell stress test for concurrent requests along with results from a test I performed in `test/`
+- Includes a Python stress test for concurrent requests, along with saved results from a test run in `test/`
 
 ## Design
 
@@ -67,6 +84,7 @@ This project is organized around a simple multithreaded HTTP server architecture
 - **HTTPResponse.cpp** - Builds a valid HTTP response string with status line, headers, and body.
 - **Router.cpp** - Decides how to respond based on the request method and path.
 - **StaticFileHandler.cpp** - Reads files from the `public/` folder and returns them as HTTP responses.
+- **test/stress_test.py** - Python load-testing script that sends waves of concurrent requests and reports success rate, latency, and throughput.
 
 ## Concurrency Model
 
